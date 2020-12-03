@@ -1,0 +1,35 @@
+a. convert rosbagfile
+kalibr_bagcreater --folder dataset-dir --output-bag awsome.bag
+
+
+#cam3 is depth topic(mono16 decode)
+kalibr_bagcreater_depthImg --folder dataset-dir --output-bag awsome.bag
+
+kalibr_bagextractor --image-topics /cam0/image_raw /cam1/image_raw --imu-topics /imu0 --output-folder dataset-dir --bag awsome.bag
+
+[ref]:https://github.com/ethz-asl/kalibr/wiki/bag-format
+----------------------------------------
+
+1.kalibr_calibrate_cameras --target dynamic/april_6x6.yaml --bag d435i_calibration1.bag --models pinhole-radtan --topics /camera/color/image_raw 
+
+
+2. kalibr_calibrate_imu_camera --target dynamic/april_6x6.yaml --bag d435i_calibration1.bag --cam camchain-d435i_calibration1.yaml --imu dynamic/imu_d435i.yaml --imu-models scale-misalignment --timeoffset-padding 0.1
+
+3.kalibr_bagcreater --folder confidence4 --output-bag awsome.bag
+
+
+//------------------------------------stereo raw_image
+
+4.kalibr_calibrate_cameras --bag zed_chess_board.bag --topics /zed2/zed_node/left_raw/image_raw_gray /zed2/zed_node/right_raw/image_raw_gray --models pinhole-radtan pinhole-radtan --target dynamic/april_6x6.yaml --show-extraction --approx-sync 0.1
+
+
+5. kalibr_calibrate_imu_camera --target dynamic/april_6x6.yaml --bag zed_chess_board2.bag --cam camchain-images.yaml --imu dynamic/imu_d435i.yaml --imu-models scale-misalignment --timeoffset-padding 0.1
+
+7.kalibr_calibrate_imu_camera --bag zed2_kalibr.bag --cam camchain-zed2_kalibr.yaml --imu dynamic/zed_imu.yaml --target dynamic/april_6x6.yaml 
+
+
+//------------------------------------stereo rect_image
+1.kalibr_calibrate_cameras --bag kalibr_zed2_VGA.bag --topics /zed2/zed_node/left/image_rect_gray /zed2/zed_node/right/image_rect_gray --models pinhole-radtan pinhole-radtan --target dynamic/april_6x6.yaml
+
+2./kalibr_ws/src/kalibr# kalibr_calibrate_imu_camera --bag kalibr_zed2_VGA.bag --cam camchain-kalibr_zed2_VGA.yaml --imu dynamic/zed_imu.yaml --target dynamic/april_6x6.yaml 
+
