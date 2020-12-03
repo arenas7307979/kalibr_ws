@@ -123,12 +123,12 @@ try:
         camdir = parsed.folder + "/{0}".format(camfolder)
         image_files = getImageFilesFromDir(camdir)
         for image_filename in image_files:
-	    if(camfolder == "cam0" or camfolder != "cam1"):
-            	image_msg, timestamp = loadImageToRosMsg(image_filename)
-	    else:
-		#TODO:: fix cam is depth img.
-		image_msg, timestamp = loadDepthImageToRosMsg(image_filename)
-	    bag.write("/{0}/image_raw".format(camfolder), image_msg, timestamp)
+            if(camfolder == "cam0" or camfolder == "cam1"):
+                image_msg, timestamp = loadImageToRosMsg(image_filename)
+            else:
+                #TODO:: fix cam is depth img.
+                image_msg, timestamp = loadDepthImageToRosMsg(image_filename)
+            bag.write("/{0}/image_raw".format(camfolder), image_msg, timestamp)
 
     #write imu data
     imufiles = getImuCsvFiles(parsed.folder)
