@@ -88,6 +88,7 @@ def createImuMessge(timestamp_int, omega, alpha):
     
     rosimu = Imu()
     rosimu.header.stamp = timestamp
+    rosimu.header.frame_id = "imu_world"
     rosimu.angular_velocity.x = float(omega[0])
     rosimu.angular_velocity.y = float(omega[1])
     rosimu.angular_velocity.z = float(omega[2])

@@ -87,6 +87,7 @@ def createImuMessge(timestamp_int, omega, alpha):
     timestamp = rospy.Time( int(timestamp_nsecs[0:-9]), int(timestamp_nsecs[-9:]) )
     
     rosimu = Imu()
+    rosimu.header.frame_id = "imu_world"
     rosimu.header.stamp = timestamp
     rosimu.angular_velocity.x = float(omega[0])
     rosimu.angular_velocity.y = float(omega[1])
