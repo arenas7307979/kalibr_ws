@@ -61,7 +61,7 @@ if parsed.image_topics is not None:
       for timestamp, image in dataset:
         print(type(image))
         print(topic)
-        if(topic == '/project/depth_gt' or topic == '/project/tof_to_left'):
+        if(topic == '/camera/aligned_depth_to_color/image_raw'):
           #convert to 16bit output
           image = image.astype(np.uint16)
         params = list()
