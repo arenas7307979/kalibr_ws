@@ -5,6 +5,7 @@ kalibr_bagcreater --folder dataset-dir --output-bag awsome.bag
 #cam3 is depth topic(mono16 decode)
 kalibr_bagcreater_depthImg --folder dataset-dir --output-bag awsome.bag
 
+//change mono16 topic in kalibr_bagextractor ==> #setting mono16 name[/camera/aligned_depth_to_color/image_raw] from rosbag topic
 kalibr_bagextractor --image-topics /cam0/image_raw /cam1/image_raw --imu-topics /imu0 --output-folder dataset-dir --bag awsome.bag
 
 [ref]:https://github.com/ethz-asl/kalibr/wiki/bag-format
